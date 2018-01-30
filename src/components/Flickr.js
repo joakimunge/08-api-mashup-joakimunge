@@ -14,20 +14,14 @@ export default class Flickr {
       fetch(flickrUrl)
         .then(res => res.json())
         .then(res => {
-          console.log('success!');
-          console.log(res);
           this.setBackground(res);
+          this.render(res);
         })
         .catch(err => console.log(err));
     }
   
     setBackground(res) {
-      const farmId = res.photos.photo[5].farm;
-      const serverId = res.photos.photo[5].server;
-      const id = res.photos.photo[5].id;
-      const secret = res.photos.photo[5].secret;
-      const url = `https://farm${farmId}.staticflickr.com/${serverId}/${id}_${secret}.jpg`;
-      console.log(this.caller);
+      const url = res.photos.photo[5].url_q;
       this.caller.background.style = `
         background: url(${url}) no-repeat;
         background-size: cover;
