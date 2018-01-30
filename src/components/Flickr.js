@@ -1,11 +1,19 @@
+import Photo from './Photo';
+
 export default class Flickr {
     constructor(apiKey, caller) {
       this.apikey = apiKey;
       this.caller = caller;
+      this.wrapper = document.querySelector('.results');
+      this.photoCounter = 0;
+      this.columnsCounter = 0;
     }
   
-    getPhotosFromQuery() {
-      const query = this.caller.input.value;
+    getPhotosFromQuery(query = null) {
+      this.wrapper.innerHTML = "";
+      if(query === null) {
+        query = this.caller.input.value;
+      }
       const sort = '&sort=interestingness-desc'
       const url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=';
       const params = '&text=' + query + sort + '&extras=url_q&format=json&nojsoncallback=1';
@@ -30,5 +38,34 @@ export default class Flickr {
         -o-background-size: cover;
       `;
   
+    }
+
+    renderPhoto(photo) {
+      const url = photo.url_q;
+      const obj = new Photo(photo);
+      const html = `
+      <div class="column">
+        <img src="${url}"></img>
+      </div>
+      `;
+      const divColumns = `<div class="columns" id=${this.columnsCounter}></div>`;
+
+      if (this.photoCounter === 0 || this.photoCounter % 3 === 0) {
+        this.wrapper.insertAdjacentHTML('beforeend', divColumns);
+      }
+
+      const currentColumn = document.getElementById(this.columnsCounter);
+
+      currentColumn.insertAdjacentHTML('beforeend', html);
+      this.photoCounter++;
+    }
+
+    render(res) {
+        let photos = res.photos.photo;
+        const row = '<div class="columns"></div>';
+        if (this.photoCounter === 0 || this.photoCounter % 3 === 0) {
+          this.wrapper.insertAdjacentHTML('beforeend', row);
+        }
+        photos = photos.map(photo => new Photo(photo, this));
     }
   }
