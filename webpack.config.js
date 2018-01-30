@@ -50,11 +50,11 @@ module.exports = {
         new webpack.LoaderOptionsPlugin({
             minimize: inProduction
         }),
-        new PurifyCSSPlugin({
-            // Give paths to parse for rules. These should be absolute!
-            paths: glob.sync(path.join(__dirname, 'index.html')), // Change this for bigger projects to a folder e.g. app/*.html
-            minimize: inProduction
-        }),
+        // new PurifyCSSPlugin({
+        //     // Give paths to parse for rules. These should be absolute!
+        //     paths: glob.sync(path.join(__dirname, 'index.html')), // Change this for bigger projects to a folder e.g. app/*.html
+        //     minimize: inProduction
+        // }),
         new CleanWebpackPlugin(['dist'], {
             root: __dirname,
             verbose: true,

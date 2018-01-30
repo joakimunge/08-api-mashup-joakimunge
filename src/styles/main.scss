@@ -1,0 +1,44 @@
+// @import "~bulma";
+
+body {
+    color: #CCC;
+    margin: 0;
+}
+
+.hero__background {
+    width:100%;
+    height:100vh;
+    background: url('/src/images/mountain-03.jpg');
+    background-size: cover;
+    z-index:0;
+    position:fixed;
+    filter:blur(30px);
+    transform: scale(1.1);
+}
+
+.hero-body {
+    z-index:9999;
+    position: relative;
+    padding:3em;
+}
+
+//Utilities
+.v-start {
+    align-items:flex-start !important;
+}
+
+.search__input {
+    min-width: 280px;
+    border:none;
+    border-radius: 2px;
+    color: #aaa;
+    box-shadow: 0px 15px 30px 0px rgba(0,0,0,0.13);
+    -webkit-appearance: none;
+    font-size: 20px;
+    font-weight: bold;
+    padding:1em;
+}
+
+.search__input:focus {
+    outline: none;
+}
