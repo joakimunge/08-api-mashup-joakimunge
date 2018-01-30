@@ -1,18 +1,20 @@
 import Flickr from './components/Flickr';
 import Thesaurus from './components/Thesaurus';
+import Photo from './components/Photo';
 
 class App {
   constructor() {
     this.form = document.querySelector('form');
     this.input = document.querySelector('.search__input');
     this.background  = document.querySelector('.hero__background');
-    this.flickr = new Flickr('9937eb786c73b10e099965d8e6e48a40', this);
-    this.thesaurus = new Thesaurus('78f3d8b49dc89abf9207cb09291eea61', this);
+    this.flickr = new Flickr(process.env.FLICKR_API, this);
+    this.thesaurus = new Thesaurus(process.env.THSRS_API, this);
     this.initialize();
   }
 
   initialize() {
     this.addEventListeners();
+    this.flickr.getPhotosFromQuery('mountains');    
   }
 
   addEventListeners() {
