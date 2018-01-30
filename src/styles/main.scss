@@ -1,8 +1,12 @@
 // @import "~bulma";
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900');
+$font-stack: 'Raleway', 'Helvetica', 'Arial', sans-serif;
+
 
 body {
     color: #CCC;
     margin: 0;
+    font-family: $font-stack;
 }
 
 .hero__background {
