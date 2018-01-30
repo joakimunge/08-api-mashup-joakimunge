@@ -13,7 +13,6 @@ export default class Thesaurus {
       fetch(thesaurusUrl)
         .then(res => res.json())
         .then(res => {
-          console.log('success!');
           this.render(res);
         })
         .catch(err => console.log(err));
@@ -21,5 +20,10 @@ export default class Thesaurus {
   
     render(res) {
       console.log(res);
+      const words = res.verb.syn.map(verb => {
+        const html = `<li class=".search__related__list__item">${verb}</li>`
+      }).join("");
+      console.log(words);
+      this.related.insertAdjacentHTML('beforeend', words);
     }
   }
