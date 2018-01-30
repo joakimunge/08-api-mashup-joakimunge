@@ -31,6 +31,14 @@ body {
     align-items:flex-start !important;
 }
 
+.hide {
+    display:none;
+}
+
+.search {
+    display:flex;
+}
+
 .search__input {
     min-width: 280px;
     border:none;
@@ -41,8 +49,41 @@ body {
     font-size: 20px;
     font-weight: bold;
     padding:1em;
+    margin-right: 2em;
 }
 
 .search__input:focus {
     outline: none;
+}
+
+.search__related {
+    width: 100%;
+    box-shadow: 0px 15px 30px 0px rgba(0,0,0,0.13);
+    padding:0;
+    background-color: #FFF;
+}
+
+.search__related__list {
+    margin:0;
+    padding:0;
+    display:flex;
+    list-style: none;
+    width: 100%;
+    height:100%;
+    justify-content: space-between;
+}
+
+.search__related__list__item {
+    text-align: center;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width:100%;
+    height:100%;
+    font-size: 14px;
+
+    &:hover {
+        background-color: #ccc;
+    }
 }
