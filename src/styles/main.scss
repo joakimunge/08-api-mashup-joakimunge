@@ -2,11 +2,19 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900');
 $font-stack: 'Raleway', 'Helvetica', 'Arial', sans-serif;
 
-
 body {
     color: #CCC;
     margin: 0;
     font-family: $font-stack;
+}
+
+//Utilities
+.v-start {
+    align-items:flex-start !important;
+}
+
+.hide {
+    display:none;
 }
 
 .hero__background {
@@ -35,15 +43,6 @@ body {
     z-index:9999;
     position: relative;
     padding:3em;
-}
-
-//Utilities
-.v-start {
-    align-items:flex-start !important;
-}
-
-.hide {
-    display:none;
 }
 
 .search {
@@ -96,5 +95,28 @@ body {
 
     &:hover {
         background-color: #ccc;
+    }
+}
+
+.results {
+    display:flex;
+    width:100%;
+}
+
+.results img {
+    border-radius: 4px;
+    box-shadow: 0px 15px 30px 0px rgba(0,0,0,0.13);
+    animation: fadeIn 0.3s ease;
+    margin:1em;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-25px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
     }
 }
