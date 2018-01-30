@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const glob = require('glob');
+const Dotenv = require('dotenv-webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack');
@@ -59,6 +60,10 @@ module.exports = {
             root: __dirname,
             verbose: true,
             dry: false
+        }),
+        new Dotenv({
+            path: './.env',
+            safe: false
         })
     ]
 };
