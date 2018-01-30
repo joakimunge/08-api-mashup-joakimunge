@@ -1,4 +1,4 @@
-// @import "~bulma";
+@import "~bulma";
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900');
 $font-stack: 'Raleway', 'Helvetica', 'Arial', sans-serif;
 
@@ -18,6 +18,17 @@ body {
     position:fixed;
     filter:blur(30px);
     transform: scale(1.1);
+
+    &::after {
+        content:"";
+        top:0;
+        left:0;
+        z-index: 1;
+        position: absolute;
+        width:100%;
+        height:100%;
+        background: rgba(255,255,255,0.5);
+    }
 }
 
 .hero-body {
