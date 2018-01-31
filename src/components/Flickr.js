@@ -7,21 +7,24 @@ export default class Flickr {
     this.wrapper = document.querySelector('.results');
     this.photoCounter = 0;
     this.columnsCounter = 0;
+    this.page = 0;
   }
 
   getPhotosFromQuery(query = null, newQuery = true) {
     if (newQuery) {
       this.wrapper.innerHTML = "";
       this.query = this.caller.input.value;
+      this.page = 5;
     } else {
       this.query = query;
+      this.page++;
     }
 
     const sort = '&sort=interestingness-desc';
     const url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=';
-    const params = '&text=' + this.query + sort + '&per_page=9&extras=url_l&format=json&nojsoncallback=1';
+    const params = '&text=' + this.query + sort + '&page=' + this.page + '&per_page=9&extras=url_z&format=json&nojsoncallback=1';
     const flickrUrl = url + this.apiKey + params;
-
+    console.log(flickrUrl);
     fetch(flickrUrl)
       .then(res => res.json())
       .then(res => {
@@ -33,7 +36,7 @@ export default class Flickr {
   }
 
   setBackground(res) {
-    const url = res.photos.photo[5].url_l;
+    const url = res.photos.photo[5].url_z;
     this.caller.background.style = `
         background: url(${url}) no-repeat;
         background-size: cover;

@@ -1,6 +1,6 @@
 export default class Photo {
   constructor(photo, caller, delay) {
-    this.url = photo.url_l;
+    this.url = photo.url_z;
     this.title = photo.title;
     this.caller = caller;
     this.delay = delay;
