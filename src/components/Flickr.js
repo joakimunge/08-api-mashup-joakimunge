@@ -5,9 +5,11 @@ export default class Flickr {
     this.apiKey = apiKey;
     this.caller = caller;
     this.wrapper = document.querySelector('.results');
-    this.photoCounter = 0;
+    this.photoCounter = 1;
     this.columnsCounter = 0;
     this.page = 0;
+
+    this.createColumns();
   }
 
   getPhotosFromQuery(query = null, newQuery = true) {
@@ -24,11 +26,9 @@ export default class Flickr {
     const url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=';
     const params = '&text=' + this.query + sort + '&page=' + this.page + '&per_page=9&extras=url_z&format=json&nojsoncallback=1';
     const flickrUrl = url + this.apiKey + params;
-    console.log(flickrUrl);
     fetch(flickrUrl)
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         this.setBackground(res);
         this.render(res);
       })
@@ -47,18 +47,25 @@ export default class Flickr {
 
   }
 
-  renderPhoto(photo, delay) {
-    const row = '<div class="results__col"></div>';
-    if (this.photoCounter === 0 || this.photoCounter % 3 === 0) {
+  renderPhoto(photo, delay, columnId) {
+    new Photo(photo, this, delay * 100, columnId);
+  }
+
+  createColumns() {
+    for (let i = 1; i < 5; i++) {
+      const row = `<div id="${i}" class="results__col"></div>`;
       this.wrapper.insertAdjacentHTML('beforeend', row);
     }
-    new Photo(photo, this, delay * 100);
-    this.photoCounter++;
   }
 
   render(res) {
-    this.photoCounter = 0;
+    document.querySelectorAll('.results__col').innerHTML = "";
     let photos = res.photos.photo;
-    photos = photos.map((photo, i) => this.renderPhoto(photo, i));
+    photos = photos.map((photo, i) => {
+      this.renderPhoto(photo, i, this.photoCounter);
+      this.photoCounter === 4
+        ? this.photoCounter = 1
+        : this.photoCounter++;
+    });
   }
 }
