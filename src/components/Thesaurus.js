@@ -19,7 +19,6 @@ export default class Thesaurus {
     }
   
     render(res) {
-      console.log(res);
       const words = res.verb.syn.map(verb => {
         const html = `<li class=".search__related__list__item">${verb}</li>`
       }).join("");
