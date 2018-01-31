@@ -16,7 +16,7 @@ export default class Flickr {
       }
       const sort = '&sort=interestingness-desc'
       const url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=';
-      const params = '&text=' + query + sort + '&extras=url_q&format=json&nojsoncallback=1';
+      const params = '&text=' + query + sort + '&per_page=18&extras=url_l&format=json&nojsoncallback=1';
       const flickrUrl = url + this.apikey + params;
   
       fetch(flickrUrl)
@@ -29,7 +29,7 @@ export default class Flickr {
     }
   
     setBackground(res) {
-      const url = res.photos.photo[5].url_q;
+      const url = res.photos.photo[5].url_l;
       this.caller.background.style = `
         background: url(${url}) no-repeat;
         background-size: cover;
