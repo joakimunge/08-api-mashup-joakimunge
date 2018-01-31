@@ -40,32 +40,18 @@ export default class Flickr {
   
     }
 
-    renderPhoto(photo) {
-      const url = photo.url_q;
-      const obj = new Photo(photo);
-      const html = `
-      <div class="column">
-        <img src="${url}"></img>
-      </div>
-      `;
-      const divColumns = `<div class="columns" id=${this.columnsCounter}></div>`;
-
+    renderPhoto(photo, delay) {
+      const row = '<div class="results__col"></div>';
       if (this.photoCounter === 0 || this.photoCounter % 3 === 0) {
-        this.wrapper.insertAdjacentHTML('beforeend', divColumns);
+          this.wrapper.insertAdjacentHTML('beforeend', row);
       }
-
-      const currentColumn = document.getElementById(this.columnsCounter);
-
-      currentColumn.insertAdjacentHTML('beforeend', html);
+      new Photo(photo, this, delay * 100);
       this.photoCounter++;
     }
 
     render(res) {
+      this.photoCounter = 0;
         let photos = res.photos.photo;
-        const row = '<div class="columns"></div>';
-        if (this.photoCounter === 0 || this.photoCounter % 3 === 0) {
-          this.wrapper.insertAdjacentHTML('beforeend', row);
-        }
-        photos = photos.map(photo => new Photo(photo, this));
+        photos = photos.map((photo, i) => this.renderPhoto(photo, i));
     }
   }
