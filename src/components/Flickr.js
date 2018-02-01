@@ -7,7 +7,6 @@ export default class Flickr {
     this.wrapper = document.querySelector('.results');
     this.photoCounter = 1;
     this.page = 0;
-    this.query = 'mountains';
     this.initialize();
   }
 
