@@ -11,26 +11,30 @@
 
 <body>
   <main id="app">
-    <section class="hero is-fullheight">
-      <div class="hero-body v-start">
-        <div class="container">
-          <section class="search section">
-            <div class="search__field">
-              <form>
-                <input class="search__input search__input--border" type="text" placeholder="Find images..">
-                <input type="submit" class="hide" />
-              </form>
-            </div>
-            <div class="search__related">
-              <ul class="search__related__list">
-              </ul>
-            </div>
-          </section>
-          <div class="results section">
-          </div>
+    <div class="container if-fluid splash">
+      <form>
+          <input class="search__input search__input--border" type="text" placeholder="Find images..">
+          <input type="submit" class="hide" />
+      </form>
+    </div>
+    <div class="container is-fluid">
+      <section class="search">
+        <div class="search__field">
+          <form>
+            <input class="search__input search__input--border" type="text" placeholder="Find images..">
+            <input type="submit" class="hide" />
+          </form>
         </div>
+        <div class="search__related">
+          <ul class="search__related__list">
+          </ul>
+        </div>
+      </section>
+    </div>
+    <div class="container is-fluid">
+      <div class="results">
       </div>
-    </section>
+    </div>
   </main>
   <script src="./dist/app.js"></script>
 </body>

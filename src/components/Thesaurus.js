@@ -14,18 +14,25 @@ export default class Thesaurus {
       .then(res => res.json())
       .then(res => {
         this.render(res);
-        console.log(res);
       })
       .catch(err => console.log(err));
   }
 
   render(res) {
     this.related.innerHTML = "";
-    const words = res.verb.syn;
+    const words = Object.keys(res).map(key => {
+      Object.values(res[key]).map(word => {
+        return word;
+      });
+    });
+
+    console.log(words);
 
     for (let i = 0; i < 6; i++) {
       const html = `<li class="search__related__list__item">${words[i]}</li>`;
       this.related.insertAdjacentHTML('beforeend', html);;
     }
   }
+
+  // FLatten response from fetch
 }

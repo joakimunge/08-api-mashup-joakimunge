@@ -7,8 +7,13 @@ sans-serif;
 
 body {
   color: #CCC;
+  // background-color: #fff;
   margin: 0;
   font-family: $font-stack;
+}
+
+.is-fluid {
+  margin:0 !important;
 }
 
 //Utilities
@@ -18,6 +23,12 @@ body {
 
 .hide {
   display: none;
+}
+
+.splash {
+  height:100vh;
+  width:100vw;
+  z-index: 9999;
 }
 
 .hero__background {
@@ -43,13 +54,17 @@ body {
 }
 
 .hero-body {
-  z-index: 9999;
+  z-index: 1;
   position: relative;
   padding: 3em;
 }
 
 .search {
   display: flex;
+  position: fixed;
+  top:2em;
+  left:2em;
+  z-index:99;
 }
 
 .search__input {
@@ -59,8 +74,7 @@ body {
   color: #aaa;
   box-shadow: 0px 15px 30px 0px rgba(0, 0, 0, 0.13);
   -webkit-appearance: none;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 20px;;
   padding: 1em;
   margin-right: 2em;
 }

@@ -25,6 +25,18 @@ class App {
 
   }
 
+  // Add api calls to array
+  // Return fetch from api calls
+  // Promise all api calls
+
+  // getPromiseDataFromArray(apiCalls) {
+  //   .then(result => {
+  //     //this.renderFlickr(result[0])
+  //     //this.renderThesaurus(result[1])
+      
+  //   })
+  // } 
+
 }
 
 new App();
