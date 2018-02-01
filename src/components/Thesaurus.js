@@ -14,14 +14,18 @@ export default class Thesaurus {
       .then(res => res.json())
       .then(res => {
         this.render(res);
+        console.log(res);
       })
       .catch(err => console.log(err));
   }
 
   render(res) {
-    const words = res.verb.syn.map(verb => {
-      const html = `<li class=".search__related__list__item">${verb}</li>`
-    }).join("");
-    this.related.insertAdjacentHTML('beforeend', words);
+    this.related.innerHTML = "";
+    const words = res.verb.syn;
+
+    for (let i = 0; i < 6; i++) {
+      const html = `<li class="search__related__list__item">${words[i]}</li>`;
+      this.related.insertAdjacentHTML('beforeend', html);;
+    }
   }
 }
