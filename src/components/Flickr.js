@@ -7,19 +7,6 @@ export default class Flickr {
     this.wrapper = document.querySelector('.results');
     this.photoCounter = 1;
     this.page = 0;
-    this.initialize();
-  }
-
-  initialize() {
-    this.loadOnScroll();
-  }
-
-  loadOnScroll() {
-    window.onscroll = (e) => {
-      if((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
-        this.loadMore();
-      }
-    }
   }
 
   getPhotosFromQuery(query = null, newQuery = true) {
@@ -37,10 +24,6 @@ export default class Flickr {
     const params = '&text=' + this.query + sort + '&page=' + this.page + '&per_page=18&extras=url_m&format=json&nojsoncallback=1';
     const flickrUrl = url + this.apiKey + params;
     return fetch(flickrUrl);
-  }
-
-  loadMore() {
-    this.getPhotosFromQuery(this.query, false);
   }
 
   renderPhoto(photo, delay, columnId) {

@@ -22,6 +22,7 @@ class App {
 
   initialize() {
     this.addEventListeners();
+    this.loadOnScroll();
   }
 
   addEventListeners() {
@@ -84,6 +85,20 @@ class App {
         })
         .catch(reject);
     });
+  }
+
+  loadOnScroll() {
+    window.onscroll = (e) => {
+      if((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
+        this.loadMore();
+      }
+    }
+  }
+
+  loadMore() {
+    const apiCall = [this.flickr.getPhotosFromQuery(this.query, false)];
+    this.getPromiseData(apiCall)
+      .then(results => this.renderApiResponse(results));
   }
 
 }
