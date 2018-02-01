@@ -6,10 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="./dist/app.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   <title>Mashup</title>
 </head>
 
 <body>
+  <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item is-flex">
+        <h2>Mashup</h2>
+      </a>
+      <div class="navbar-item">
+          <span class="divider"></span>
+      </div>
+      <div class="navbar-item">
+          <form id="form__search__nav">
+            <input type="text" placeholder="Find images..">
+            <input type="submit" class="hide" />
+          </form>
+      </div>
+      <div class="navbar-item h-end">
+        <a href="http://www.github.com/joakimunge"><i class="fab fa-github" data-fa-transform="grow-6"></i></a>
+      </div>
+    </div>
+  </nav>
   <main id="app">
     <div class="container is-fluid">
       <div class="hero__background">
@@ -17,16 +37,15 @@
       <section class="search">
           <h1>Mashup</h1>
           <span class="divider"></span>
-        <div class="search__field">
-          <form>
-            <input class="search__input search__input--border" type="text" placeholder="Find images..">
-            <input type="submit" class="hide" />
-          </form>
-        </div>
-        <div class="search__related">
-          <ul class="search__related__list">
+          <div class="search__field">
+            <form id="form__search__main">
+              <input class="search__input search__input--border" type="text" placeholder="Find images..">
+              <input type="submit" class="hide" />
+            </form>
+          </div>
+          <ul class="social">
+              <li><a href="http://www.github.com/joakimunge"><i class="fab fa-github" data-fa-transform="grow-6"></i></a></li>
           </ul>
-        </div>
       </section>
     </div>
     <div class="container is-fluid">
@@ -35,6 +54,7 @@
     </div>
   </main>
   <script src="./dist/app.js"></script>
+  
 </body>
 
 </html>

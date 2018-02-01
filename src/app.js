@@ -5,9 +5,10 @@ import Photo from './components/Photo';
 
 class App {
   constructor() {
-    this.form = document.querySelector('form');
+    this.form = document.querySelector('#form__search__main');
     this.search = document.querySelector('.search');
     this.input = document.querySelector('.search__input');
+    this.navbar = document.querySelector('.navbar');
     this.background = document.querySelector('.hero__background');
     this.flickr = new Flickr(process.env.FLICKR_API, this);
     this.thesaurus = new Thesaurus(process.env.THSRS_API, this);
@@ -22,10 +23,14 @@ class App {
   addEventListeners() {
     this.form.addEventListener('submit', (e) => {
       e.preventDefault();
+      this.navbar.style.display = 'block';
       this.background.style = '';
-      this.search.className += ' slideCorner';
+      this.search.className += ' fadeOut';
       this.flickr.getPhotosFromQuery(this.input.value);
       this.thesaurus.getWordsFromQuery(this.input.value);
+    });
+    this.search.addEventListener('animationend', (e) => {
+      this.search.style.display = 'none';
     });
 
   }
