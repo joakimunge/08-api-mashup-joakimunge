@@ -8,7 +8,6 @@ export default class Unsplash {
     getPhotosFromQuery() {
         const photo = '_F9rJR86qf4' //temporary
         const url = 'https://api.unsplash.com/photos/' + photo + '?client_id=' + this.apiKey;
-        console.log(url);
         fetch(url)
           .then(res => res.json())
           .then(res => {

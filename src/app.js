@@ -13,6 +13,7 @@ class App {
     this.navbar = document.querySelector('.navbar');
     this.background = document.querySelector('.hero__background');
     this.related = document.querySelector('.search__related__list');
+    this.loader = document.createElement('span');
     this.flickr = new Flickr(process.env.FLICKR_API, this);
     this.thesaurus = new Thesaurus(process.env.THSRS_API, this);
     this.unsplash = new Unsplash(process.env.UNSPLASH_API, this);
@@ -50,22 +51,40 @@ class App {
   }
 
   search(query) {
-    this.flickr.getPhotosFromQuery(query);
-    this.thesaurus.getWordsFromQuery(query);
+    const apiCalls = [
+      this.flickr.getPhotosFromQuery(query),
+      this.thesaurus.getWordsFromQuery(query)
+    ];
+    this.loader.classList.add('loader');
+    this.flickr.wrapper.appendChild(this.loader);
+    this.getPromiseData(apiCalls)
+      .then(results => this.renderApiResponse(results))
+      .then(this.loader.classList.remove('loader'));
   }
-  
 
-  // Add api calls to array
-  // Return fetch from api calls
-  // Promise all api calls
+  renderApiResponse(data) {
+    data.map(res => {
+      if (res.photos) {
+        this.flickr.render(res);
+      } else {
+        this.thesaurus.render(res);
+      }
+    });
+  }
 
-  // getPromiseDataFromArray(apiCalls) {
-  //   .then(result => {
-  //     //this.renderFlickr(result[0])
-  //     //this.renderThesaurus(result[1])
-      
-  //   })
-  // } 
+  getPromiseData(promises) {
+    return new Promise((resolve, reject) => {
+      Promise.all(promises)
+        .then(res => {
+          return res.map(type => type.json());
+        })
+        .then(res => {
+          Promise.all(res)
+            .then(resolve);
+        })
+        .catch(reject);
+    });
+  }
 
 }
 

@@ -8,12 +8,7 @@ export default class Thesaurus {
     const url = 'http://words.bighugelabs.com/api/2/78f3d8b49dc89abf9207cb09291eea61/';
     const thesaurusUrl = url + query + '/json';
 
-    fetch(thesaurusUrl)
-      .then(res => res.json())
-      .then(res => {
-        this.render(res);
-      })
-      .catch(err => console.log(err));
+    return fetch(thesaurusUrl);
   }
 
   render(res) {
