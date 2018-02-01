@@ -2,11 +2,9 @@ export default class Thesaurus {
   constructor(apiKey, caller) {
     this.apiKey = apiKey;
     this.caller = caller;
-    this.related = document.querySelector('.search__related__list');
   }
 
-  getWordsFromQuery() {
-    const query = this.caller.input.value;
+  getWordsFromQuery(query) {
     const url = 'http://words.bighugelabs.com/api/2/78f3d8b49dc89abf9207cb09291eea61/';
     const thesaurusUrl = url + query + '/json';
 
@@ -19,20 +17,22 @@ export default class Thesaurus {
   }
 
   render(res) {
-    this.related.innerHTML = "";
+    this.caller.related.innerHTML = "";
+    const wordArray = [];
     const words = Object.keys(res).map(key => {
       Object.values(res[key]).map(word => {
-        return word;
+        wordArray.push(word);
       });
     });
 
-    console.log(words);
+    const mergedArray = [].concat.apply([], wordArray);
 
     for (let i = 0; i < 6; i++) {
-      const html = `<li class="search__related__list__item">${words[i]}</li>`;
-      this.related.insertAdjacentHTML('beforeend', html);;
+      if (mergedArray[i] === undefined) {
+        return;
+      }
+      const html = `<li>${mergedArray[i]}</li>`;
+      this.caller.related.insertAdjacentHTML('beforeend', html);;
     }
   }
-
-  // FLatten response from fetch
 }
