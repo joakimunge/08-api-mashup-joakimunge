@@ -13,7 +13,6 @@ export default class Flickr {
 
   initialize() {
     this.loadOnScroll();
-    this.getPhotosFromQuery(this.query);
   }
 
   loadOnScroll() {
@@ -34,7 +33,7 @@ export default class Flickr {
       this.page++;
     }
 
-    const sort = '&sort=interestingness-desc';
+    const sort = '&sort=relevance';
     const url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=';
     const params = '&text=' + this.query + sort + '&page=' + this.page + '&per_page=18&extras=url_m&format=json&nojsoncallback=1';
     const flickrUrl = url + this.apiKey + params;
