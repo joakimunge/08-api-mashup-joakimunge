@@ -36,12 +36,7 @@ export default class Flickr {
     const url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=';
     const params = '&text=' + this.query + sort + '&page=' + this.page + '&per_page=18&extras=url_m&format=json&nojsoncallback=1';
     const flickrUrl = url + this.apiKey + params;
-    fetch(flickrUrl)
-      .then(res => res.json())
-      .then(res => {
-        this.render(res);
-      })
-      .catch(err => console.log(err));
+    return fetch(flickrUrl);
   }
 
   loadMore() {
