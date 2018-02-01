@@ -5,6 +5,7 @@ $font-stack: 'Raleway',
 'Arial',
 sans-serif;
 $primary: rgb(255, 102, 102);
+$primary-highlight: rgb(255, 176, 176);
 $secondary: #1c1c1c;
 
 body {
@@ -106,6 +107,8 @@ a {
   top:40%;
   left:25%;
   z-index:99;
+  opacity: 1;
+  animation: fadeIn 0.8s ease forwards;
 
   h1 {
     font-size: 48px;
@@ -134,9 +137,14 @@ a {
   font-size: 20px;;
   padding: 1em;
   margin-right: 2em;
+  transition: min-width 0.3s ease;
 
   &::placeholder {
     color: #FFF;
+  }
+
+  &:focus {
+    min-width: 320px;
   }
 }
 
@@ -145,20 +153,38 @@ a {
 }
 
 .search__related {
-  width: 100%;
-  box-shadow: 0px 15px 30px 0px rgba(0, 0, 0, 0.13);
-  padding: 0;
-  background-color: #FFF;
+  display:flex;
+  padding:1em;
+
+  h3 {
+    color: #FFF;
+    font-size:18px;
+    margin-right: 1em;
+    display:block;
+  }
 }
 
 .search__related__list {
-  margin: 0;
-  padding: 0;
   display: flex;
-  list-style: none;
-  width: 100%;
-  height: 100%;
-  justify-content: space-between;
+
+  li {
+    text-align: center;
+    display: bl;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 12px;
+    margin-left:1em;
+    background-color: $primary;
+    color:#FFF;
+    font-weight: bold;
+    border-radius: 25px;
+    padding: 0.5em 1.5em;
+
+    &:hover {
+      background-color: $primary-highlight;
+    }
+  }
 }
 
 .search__related__list__item {

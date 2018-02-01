@@ -13,7 +13,7 @@
 <body>
   <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item is-flex">
+      <a href="/" class="navbar-item is-flex">
         <h2>Mashup</h2>
       </a>
       <div class="navbar-item">
@@ -21,10 +21,15 @@
       </div>
       <div class="navbar-item">
           <form id="form__search__nav">
-            <input type="text" placeholder="Find images..">
+            <input id="input__nav" type="text" placeholder="Find images..">
             <input type="submit" class="hide" />
           </form>
       </div>
+      <div class="navbar-item search__related">
+          <h3>Related: </h3>
+            <ul class="search__related__list">
+            </ul>
+        </div>
       <div class="navbar-item h-end">
         <a href="http://www.github.com/joakimunge"><i class="fab fa-github" data-fa-transform="grow-6"></i></a>
       </div>
