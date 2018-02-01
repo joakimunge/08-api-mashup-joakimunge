@@ -19,9 +19,20 @@ export default class Thesaurus {
   }
 
   render(res) {
-    const words = res.verb.syn.map(verb => {
-      const html = `<li class=".search__related__list__item">${verb}</li>`
-    }).join("");
-    this.related.insertAdjacentHTML('beforeend', words);
+    this.related.innerHTML = "";
+    const words = Object.keys(res).map(key => {
+      Object.values(res[key]).map(word => {
+        return word;
+      });
+    });
+
+    console.log(words);
+
+    for (let i = 0; i < 6; i++) {
+      const html = `<li class="search__related__list__item">${words[i]}</li>`;
+      this.related.insertAdjacentHTML('beforeend', html);;
+    }
   }
+
+  // FLatten response from fetch
 }

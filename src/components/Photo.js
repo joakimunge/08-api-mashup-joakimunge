@@ -1,9 +1,10 @@
 export default class Photo {
-  constructor(photo, caller, delay) {
-    this.url = photo.url_z;
+  constructor(photo, caller, delay, columnId) {
+    this.url = photo.url_m;
     this.title = photo.title;
     this.caller = caller;
     this.delay = delay;
+    this.columnId = columnId;
     this.initialize();
   }
 
@@ -16,6 +17,7 @@ export default class Photo {
         <div class="results__col__item" style="animation-delay: ${this.delay}ms">
           <a href="#"><img src="${this.url}"></img></a>
         </div>`;
-    this.caller.wrapper.lastChild.insertAdjacentHTML('beforeend', html);
+    const column = document.getElementById('col-' + this.columnId);
+    column.insertAdjacentHTML('beforeend', html);
   }
 }

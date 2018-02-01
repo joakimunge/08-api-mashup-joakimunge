@@ -5,60 +5,69 @@ export default class Flickr {
     this.apiKey = apiKey;
     this.caller = caller;
     this.wrapper = document.querySelector('.results');
-    this.photoCounter = 0;
-    this.columnsCounter = 0;
+    this.photoCounter = 1;
     this.page = 0;
+    this.query = 'mountains';
+    this.initialize();
+  }
+
+  initialize() {
+    this.loadOnScroll();
+  }
+
+  loadOnScroll() {
+    window.onscroll = (e) => {
+      if((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
+        this.loadMore();
+      }
+    }
   }
 
   getPhotosFromQuery(query = null, newQuery = true) {
     if (newQuery) {
       this.wrapper.innerHTML = "";
-      this.query = this.caller.input.value;
+      this.renderColumns();
+      this.query = query;
       this.page = 5;
     } else {
-      this.query = query;
       this.page++;
     }
 
-    const sort = '&sort=interestingness-desc';
+    const sort = '&sort=relevance';
     const url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=';
-    const params = '&text=' + this.query + sort + '&page=' + this.page + '&per_page=9&extras=url_z&format=json&nojsoncallback=1';
+    const params = '&text=' + this.query + sort + '&page=' + this.page + '&per_page=18&extras=url_m&format=json&nojsoncallback=1';
     const flickrUrl = url + this.apiKey + params;
-    console.log(flickrUrl);
     fetch(flickrUrl)
       .then(res => res.json())
       .then(res => {
-        console.log(res);
-        this.setBackground(res);
         this.render(res);
       })
       .catch(err => console.log(err));
   }
 
-  setBackground(res) {
-    const url = res.photos.photo[5].url_z;
-    this.caller.background.style = `
-        background: url(${url}) no-repeat;
-        background-size: cover;
-        -webkit-background-size: cover;
-        -moz-background-size: cover; 
-        -o-background-size: cover;
-      `;
-
+  loadMore() {
+    this.getPhotosFromQuery(this.query, false);
   }
 
-  renderPhoto(photo, delay) {
-    const row = '<div class="results__col"></div>';
-    if (this.photoCounter === 0 || this.photoCounter % 3 === 0) {
-      this.wrapper.insertAdjacentHTML('beforeend', row);
+  renderPhoto(photo, delay, columnId) {
+    new Photo(photo, this, delay * 100, columnId);
+  }
+
+  renderColumns() {
+    for (let i = 1; i < 5; i++) {
+      const col = `<div id="col-${i}" class="results__col"></div>`;
+      this.wrapper.insertAdjacentHTML('beforeend', col);
     }
-    new Photo(photo, this, delay * 100);
-    this.photoCounter++;
   }
 
   render(res) {
-    this.photoCounter = 0;
+    document.querySelectorAll('.results__col').innerHTML = "";
     let photos = res.photos.photo;
-    photos = photos.map((photo, i) => this.renderPhoto(photo, i));
+    photos = photos.map((photo, i) => {
+      this.renderPhoto(photo, i, this.photoCounter);
+      this.photoCounter === 4
+        ? this.photoCounter = 1
+        : this.photoCounter++;
+    });
   }
 }
